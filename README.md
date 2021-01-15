@@ -8,3 +8,4 @@ TODO:
 - [ ] can create browser
 - [ ] can join
 - [ ] it works!
+- [ ] create release binary using http://www.py2exe.org/
