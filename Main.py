@@ -21,7 +21,7 @@ def click(path):
         driver.quit()
 
 #The path to the location where the chromedriver is located at
-PATH = "chromedriver"
+PATH = "chromedriver.exe"
 
 #Automatically adds the profile 1 user to chrome to prevent any future sign ins after the first time
 options = webdriver.ChromeOptions()
@@ -57,6 +57,7 @@ while not exit:
 
 # Sign in
 click("/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[3]/div[2]/div/div/div/div/input")
+
 
 #The while loop loops through the first page of classes (the active classes) and clicks on the desired class
 i = 0
@@ -108,10 +109,3 @@ click('''//*[@id="hangup-button"]''')
 time.sleep(5)
 click('''//*[@id="page-content-wrapper"]/div[1]/div/div/div[2]/div/div/button''')
 driver.quit()
-
-
-
-
-
-
-
