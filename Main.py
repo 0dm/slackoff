@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-c = 'SCH4U0C Teams Meeting Link'.lower()
+c = ('Test Meeting').lower()
 
 #The click function clicks the desired path
 def click(path):
@@ -37,53 +37,52 @@ time.sleep(5)
 #The while loop loops through the first page of classes (the active classes) and clicks on the desired class
 i = 0
 end = False
-element = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[1]/a'))
-    )
+
 
 while end != True:
     i += 1
-    click('''//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[%s]/a''' % (i))
     element = driver.find_element_by_xpath('''//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[%s]/a''' % (i))
     print (element.get_attribute('title'))
+    if i % 29 == 0:
+        click('''//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[%s]/a''' % (i))
     if element.get_attribute('title').lower() == c:
         click('''//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[%s]/a''' % (i))
         end = True
 
-
-
-time.sleep(5)
-driver.quit()
-'''
-// * [ @ id = "chatstab"] / div / div / chat - list - bridge / div / div[1] / div / ul / li / div[2] / div[4] / a
-// * [ @ id = "chatstab"] / div / div / chat - list - bridge / div / div[1] / div / ul / li / div[2] / div[5] / a
-
-//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[5]/a
-'''
-#Find a way to loop through website's chat bar's Xpath
-#Use the xpath and return the title associated with it
-#If the title == the desired class's title's Xpath
-#Then you enter the class
-
-
-'''
-click('//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[2]/a')
-
-click('//*[@id="app-messages-header"]/ng-include/chat-header/div/div[3]/button[1]')     #join button
-
+click('''//*[@id="app-messages-header"]/ng-include/chat-header/div/div[3]/button[1]''')
 try:
-    time.sleep(5)
-    element = WebDriverWait(driver, 10).until(
+    time.sleep(3)
+    element = WebDriverWait(driver, 5).until(
         EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/div/div[2]/div[1]/div[2]/div/div/section/div[2]/toggle-button[1]))
+            (By.XPATH, '//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/div/div[2]/div[1]/div[2]/div/div/section/div[2]/toggle-button[1]'))
     )
     if element.get_attribute('title') == 'Turn camera off':
         element.click()
 except:
     driver.quit()
 
-'''
+
+try:
+    time.sleep(3)
+    element = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located(
+            (By.XPATH,'//*[@id="preJoinAudioButton"]'))
+    )
+    if element.get_attribute('title') == 'Mute microphone':
+        element.click()
+except:
+    driver.quit()
+
+click('''//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/div/div[2]/div[1]/div[2]/div/div/section/div[1]/div/div/button''')
+
+time.sleep(5)
+driver.quit()
+
+#Find a way to loop through website's chat bar's Xpath
+#Use the xpath and return the title associated with it
+#If the title == the desired class's title's Xpath
+#Then you enter the class
+
 
 
 
