@@ -1,6 +1,7 @@
 # slackoff - Get some sleep
 
-Automatically join Google Meets for PDSB & HDSB.
+Join Google Meets & Microsoft Teams
+Designed for Peel & Halton District School boards
 
 TODO:
 - [x] .ini config (or we can go with JSON?)
