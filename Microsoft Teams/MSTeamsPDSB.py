@@ -78,9 +78,19 @@ click('//*[@id="preJoinAudioButton"]')
 click('''//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/div/div[2]/div[1]/div[2]/div/div/section/div[1]/div/div/button''')
 
 
-#At a certain time, clicks the leave 
-time.sleep(30)
-click('''//*[@id="hangup-button"]''')
-time.sleep(10)
+#At a certain time, clicks the leave
+time.sleep(20)
+click('''/html/body/div[1]/div[2]/div[2]/div[1]/div/calling-screen/div/div[2]/calling-unified-bar/section/div/div/div[3]/items-group/div/item-widget[2]/push-button/div/button''')
+while end2 != True:
+  time.sleep(30)
+  p = find_element_by_xpath('''/html/body/div[1]/div[2]/div[2]/div[1]/div/calling-screen/div/div[2]/meeting-panel-components/calling-roster/div/div[3]/div/div[1]/accordion/div/accordion-section[2]/div/calling-roster-section/div/div[1]/button/span[3]''')
+  p.get_attribute()
+  del p[0]
+  del p[-1]
+  print(p)
+  if int(p) <= 5:
+    click('''//*[@id="hangup-button"]''')
+    end2 = True
+
 click('''//*[@id="page-content-wrapper"]/div[1]/div/div/div[2]/div/div/button''')
 driver.quit()
