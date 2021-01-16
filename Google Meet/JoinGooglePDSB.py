@@ -1,3 +1,5 @@
+# Some school boards like PDSB login with Microsoft after entering the email on Google.
+
 import time
 import selenium
 import configparser
@@ -18,7 +20,7 @@ def click(path):
         driver.quit()
 
 # The path to the location where the chromedriver is located at
-PATH = "Google Meet\chromedriver.exe"
+PATH = "../chromedriver.exe"
 
 # Automatically adds the profile 1 user to chrome to prevent any future sign ins after the first time
 options = webdriver.ChromeOptions()
