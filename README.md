@@ -1,4 +1,4 @@
-# slackoff
+# slackoff - Get some sleep
 
 Automatically join Google Meets for PDSB & HDSB.
 
