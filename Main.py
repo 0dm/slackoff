@@ -25,7 +25,17 @@ PATH = "chromedriver.exe"
 
 #Automatically adds the profile 1 user to chrome to prevent any future sign ins after the first time
 options = webdriver.ChromeOptions()
-
+options.add_argument("--disable-default-apps")
+options = webdriver.ChromeOptions()
+options.add_experimental_option("prefs", {
+    "profile.default_content_setting_values.media_stream_mic": 1,
+    "profile.default_content_setting_values.media_stream_camera": 1,
+  })
+options.add_argument('--lang=en-US')
+options.add_experimental_option("prefs", {
+    "profile.default_content_setting_values.media_stream_mic": 1,
+    "profile.default_content_setting_values.media_stream_camera": 1,
+  })
 driver = webdriver.Chrome(executable_path=PATH, options=options)
 
 # Parse ini file
@@ -36,8 +46,10 @@ config.read("config.ini")
 driver.get(config["Login"]["MeetingLink"])
 
 #Wait for the website to load in
-time.sleep(5)
 
+user_path = "/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[2]/div[2]/div/input[1]"
+pass_path = "/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[2]/div/div[2]/input"
+time.sleep(5)
 user_path = "/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[2]/div[2]/div/input[1]"
 pass_path = "/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[2]/div/div[2]/input"
 
@@ -54,12 +66,12 @@ while not exit:
     exit = True
   except:
     pass
+click('//*[@id="idSIButton9"]')
 
-# Sign in
-click("/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[3]/div[2]/div/div/div/div/input")
+click('//*[@id="idSIButton9"]')
+time.sleep(5)
 
-#The while loop loops through the first page of classes (the active classes) and clicks on the desired class\
-
+#The while loop loops through the first page of classes (the active classes) and clicks on the desired class
 i = 0
 end = False
 while end != True:
@@ -108,7 +120,7 @@ click('''//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/
 
 #At a certain time, clicks the leave button
 
-click('''//*[@id="hangup-button"]''')
-time.sleep(5)
-click('''//*[@id="page-content-wrapper"]/div[1]/div/div/div[2]/div/div/button''')
-driver.quit()
+#click('''//*[@id="hangup-button"]''')
+#time.sleep(5)
+#click('''//*[@id="page-content-wrapper"]/div[1]/div/div/div[2]/div/div/button''')
+#driver.quit()
