@@ -45,12 +45,17 @@ user_path = "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1
 pass_path = "/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[2]/div/div[2]/input"
 button = "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button"
 
+#Automatically inputs the username and proceeds next onto the Microsoft login
 click(user_path)
 driver.find_element_by_xpath(user_path).send_keys(config["Login"]["Name"])
 click(button)
+
+#Inputs the username again for the Microsoft/pdsb login
 click('/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[2]/div[2]/div/input[1]')
 driver.find_element_by_xpath('/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[2]/div[2]/div/input[1]').send_keys(config["Login"]["Name"])
 click('/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[4]/div/div/div/div[2]/input')
+
+#Inputs the password for the Microsoft/pdsb login
 click(pass_path)
 driver.find_element_by_xpath(pass_path).send_keys(config["Login"]["Password"])
 click('/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[3]/div[2]/div/div/div/div/input')
