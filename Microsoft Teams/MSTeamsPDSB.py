@@ -31,7 +31,7 @@ def click(path):
 def joinClass():
     global driver
     # The path to the location where the chromedriver is located at
-    PATH = "chromedriver.exe"
+    PATH = "../chromedriver.exe"
 
     # Automatically adds the profile 1 user to chrome to prevent any future sign ins after the first time
     options = webdriver.ChromeOptions()
@@ -43,9 +43,6 @@ def joinClass():
     options.add_argument('--lang=en-US')
     driver = webdriver.Chrome(executable_path=PATH, options=options)
 
-    # Parse ini file
-    config = configparser.ConfigParser()
-    config.read("config.ini")
     driver.get(
         'https://teams.microsoft.com/_#/conversations/19:meeting_Nzc3NWFjOTctNTQxMC00NWI0LTk0YWMtZmE1Y2VlMzVlYjhm@thread.v2?ctx=chat')
     # The driver obtains the path to the website (Microsoft Teams)
@@ -86,12 +83,21 @@ def joinClass():
             '//*[@id="page-content-wrapper"]/div[1]/div/calling-screen/div/div[2]/meeting-panel-components/calling-roster/div/div[3]/div/div[1]/accordion/div/accordion-section[2]/div/calling-roster-section/div/div[1]/button').get_attribute(
             'aria-label')
         p = p.replace(remove, '')
-        if int(p) < 2:
+        if int(p) < config[Preferences][MinimumPeople]:
             end2 = True
     click('''//*[@id="hangup-button"]''')
 
-schedule.every().day.at('23:46').do(joinClass)
+
+
+# Parse ini file
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+if config["Preferences"]["UseJoinTime"] == True:
+    schedule.every().day.at(config["Preferences"]["JoinTime"]).do(joinClass)
+else:
+    joinClass()
 
 while True:
     schedule.run_pending()
-    time.sleep(5)
+    time.sleep(10)
