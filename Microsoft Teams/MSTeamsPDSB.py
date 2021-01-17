@@ -46,24 +46,30 @@ config.read("config.ini")
 # The driver obtains the path to the website (Microsoft Teams)
 driver.get(config["Login"]["MeetingLink"])
 
-# Wait for the website to load in
 
 user_path = "/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[2]/div[2]/div/input[1]"
 pass_path = "/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[2]/div/div[2]/input"
 click(user_path)
+
+#Automatically inpust the username and proceeds next
 driver.find_element_by_xpath(user_path).send_keys(config["Login"]["Name"])
 click("/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[4]/div/div/div/div/input")
-
 click('//*[@id="aadTile"]')
 click('//*[@id="i0118"]')
+
+#Automatically inpust the password and proceeds next
 driver.find_element_by_xpath('//*[@id="i0118"]').send_keys(config["Login"]["Password"])
+
+#Clicks next for the following pop-ups
 click('//*[@id="idSIButton9"]')
 click('//*[@id="idSIButton9"]')
+
+#To make sure that the website is on the chat page
+click('//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[1]/a')
 
 # The while loop loops through the first page of classes (the active classes) and clicks on the desired class
 i = 0
 end = False
-click('//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[1]/a')
 while end != True:
     i += 1
     element = driver.find_element_by_xpath(
@@ -74,6 +80,7 @@ while end != True:
         click('''//*[@id="chatstab"]/div/div/chat-list-bridge/div/div[1]/div/ul/li/div[2]/div[%s]/a''' % (i))
         end = True
 
+#Turns off the camera and microphone
 click('''//*[@id="app-messages-header"]/ng-include/chat-header/div/div[3]/button[1]''')
 click(
     '//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/div/div[2]/div[1]/div[2]/div/div/section/div[2]/toggle-button[1]')
