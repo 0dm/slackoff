@@ -47,8 +47,6 @@ driver.get('https://teams.microsoft.com/_#/conversations/19:meeting_Nzc3NWFjOTct
 user_path = '//*[@id="i0116"]'
 pass_path = '//*[@id="i0118"]'
 click(user_path)
-
-#Automatically inpust the username and proceeds next
 driver.find_element_by_xpath(user_path).send_keys(config["Login"]["Name"])
 click("/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[4]/div/div/div/div/input")
 
