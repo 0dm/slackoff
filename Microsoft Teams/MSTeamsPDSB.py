@@ -93,7 +93,7 @@ def joinClass():
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-if config["Preferences"]["UseJoinTime"] == 'on':
+if config["Preferences"]["UseJoinTime"] == True:
     schedule.every().day.at(config["Preferences"]["JoinTime"]).do(joinClass)
 else:
     joinClass()

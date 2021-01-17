@@ -70,18 +70,17 @@ def joinClass():
     '/html/body/div[1]/c-wiz/div[1]/div/div[8]/div[3]/div[6]/div[3]/div/div[2]/div[1]/span/span/div/div/span[2]'))
     if p < config["Preferences"]["MinimumPeople"]:
          end2 = True
-    click("/html/body/div[1]/c-wiz/div[1]/div/div[8]/div[3]/div[9]/div[2]/div[2]/div")
+  click("/html/body/div[1]/c-wiz/div[1]/div/div[8]/div[3]/div[9]/div[2]/div[2]/div")
 
 # Parse ini file
 config = configparser.ConfigParser()
 config.read("config.ini")
-joinClass()
 
-if config["Preferences"]["UseJoinTime"]:
+if config["Preferences"]["UseJoinTime"] == True:
     schedule.every().day.at(config["Preferences"]["JoinTime"]).do(joinClass)
 else:
     joinClass()
 
-while config["Preferences"]["UseJoinTime"]:
+while config["Preferences"]["UseJoinTime"] == True:
     schedule.run_pending()
     time.sleep(10)

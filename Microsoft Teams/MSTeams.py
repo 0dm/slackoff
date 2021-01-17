@@ -96,6 +96,6 @@ if config["Preferences"]["UseJoinTime"] == True:
 else:
     joinClass()
 
-while True:
+while config["Preferences"]["UseJoinTime"] == True:
     schedule.run_pending()
     time.sleep(10)
