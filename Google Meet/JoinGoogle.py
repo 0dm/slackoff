@@ -9,13 +9,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # The click function clicks the desired path
 def click(path):
+  e = False
+  while not e:
     try:
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.XPATH, path))
         )
         element.click()
+        e = True
     except:
-        driver.quit()
+        pass
 
 # The path to the location where the chromedriver is located at
 PATH = "../chromedriver.exe"
@@ -44,25 +47,19 @@ button = "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/d
 click(user_path)
 driver.find_element_by_xpath(user_path).send_keys(config["Login"]["Name"])
 click(button)
+click(pass_path)
+driver.find_element_by_xpath(pass_path).send_keys(config["Login"]["Password"])
+click(button)
 
-exit = False
-while not exit:
-  try:
-    time.sleep(2)
-    click(pass_path)
-    driver.find_element_by_xpath(pass_path).send_keys(config["Login"]["Password"])
-    click(button)
-    exit = True
-  except:
-    pass
 
 code_path = "/html/body/div[1]/c-wiz/div/div/div/div[2]/div[2]/div[2]/div/c-wiz/div[1]/div/div/div[1]"
 click(code_path)
 driver.find_element_by_xpath("/html/body/div[1]/div[3]/div/div[2]/span/div/div[2]/div[1]/div[1]/input").send_keys(config["Login"]["Link"] + "\n")
 
 # google meet is so slow????
-time.sleep(8)
+
 # Disable Camera & Microphone
+time.sleep(2)
 click("/html/body/div[1]/c-wiz/div/div/div[8]/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div[3]/div[2]/div/div")
 click("/html/body/div[1]/c-wiz/div/div/div[8]/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div[3]/div[1]/div[1]/div/div[1]")
 

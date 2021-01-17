@@ -11,13 +11,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # The click function clicks the desired path
 def click(path):
+  e = False
+  while not e:
     try:
         element = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.XPATH, path))
         )
         element.click()
+        e = True
     except:
-        driver.quit()
+        pass
 
 # The path to the location where the chromedriver is located at
 PATH = "../chromedriver.exe"
@@ -27,8 +30,8 @@ options = webdriver.ChromeOptions()
 options.add_experimental_option("prefs", {
     "profile.default_content_setting_values.media_stream_mic": 1,
     "profile.default_content_setting_values.media_stream_camera": 1,
+    "profile.default_content_setting_values.notifications": 1
   })
-
 driver = webdriver.Chrome(executable_path=PATH, options=options)
 
 # Parse ini file
@@ -48,16 +51,10 @@ click(button)
 time.sleep(10) 
 driver.find_element_by_xpath('''/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[2]/div[2]/div/input[1]''').send_keys(config["Login"]["Name"])
 click('''/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div/div/div[4]/div/div/div/div[2]/input''')
-exit = False
-while not exit:
-  try:
-    time.sleep(2)
-    click(pass_path)
-    driver.find_element_by_xpath(pass_path).send_keys(config["Login"]["Password"])
-    click('''/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[3]/div[2]/div/div/div/div/input''')
-    exit = True
-  except:
-    pass
+click(pass_path)
+driver.find_element_by_xpath(pass_path).send_keys(config["Login"]["Password"])
+click('''/html/body/div/form[1]/div/div/div[2]/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[3]/div[2]/div/div/div/div/input''')
+
 
 click('//*[@id="idSIButton9"]')
 click('''/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button''')
@@ -66,7 +63,6 @@ code_path = "/html/body/div[1]/c-wiz/div/div/div/div[2]/div[2]/div[2]/div/c-wiz/
 click(code_path)
 driver.find_element_by_xpath("/html/body/div[1]/div[3]/div/div[2]/span/div/div[2]/div[1]/div[1]/input").send_keys(config["Login"]["Link"] + "\n")
 
-time.sleep(8)
 # Disable Camera & Microphone
 click("/html/body/div[1]/c-wiz/div/div/div[8]/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div[3]/div[2]/div/div")
 click("/html/body/div[1]/c-wiz/div/div/div[8]/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div[3]/div[1]/div[1]/div/div[1]")
