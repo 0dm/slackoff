@@ -1,6 +1,8 @@
 # slackoff - Get some sleep
 
-Join Google Meets & Microsoft Teams
+### Created for Hack The North 2020++
+
+Join Google Meets & Microsoft Teams at a scheduled time and leave when everyone else does.
 
 Designed for Peel & Halton District School boards
 
