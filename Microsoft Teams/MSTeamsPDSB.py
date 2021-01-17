@@ -83,7 +83,7 @@ def joinClass():
             '//*[@id="page-content-wrapper"]/div[1]/div/calling-screen/div/div[2]/meeting-panel-components/calling-roster/div/div[3]/div/div[1]/accordion/div/accordion-section[2]/div/calling-roster-section/div/div[1]/button').get_attribute(
             'aria-label')
         p = p.replace(remove, '')
-        if int(p) < config[Preferences][MinimumPeople]:
+        if int(p) < config["Preferences"]["MinimumPeople"]:
             end2 = True
     click('''//*[@id="hangup-button"]''')
 
@@ -93,7 +93,7 @@ def joinClass():
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-if config["Preferences"]["UseJoinTime"] == True:
+if config["Preferences"]["UseJoinTime"] == 'on':
     schedule.every().day.at(config["Preferences"]["JoinTime"]).do(joinClass)
 else:
     joinClass()
