@@ -62,15 +62,15 @@ def joinClass():
 
   # Join Call
   click("/html/body/div[1]/c-wiz/div/div/div[8]/div[3]/div/div/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div[1]")
-  end2 = False
 
+  end2 = False
   while not end2:
-    time.sleep(5)
-    p = str(driver.find_element_by_xpath(
-    '/html/body/div[1]/c-wiz/div[1]/div/div[8]/div[3]/div[6]/div[3]/div/div[2]/div[1]/span/span/div/div/span[2]'))
-    if p < config["Preferences"]["MinimumPeople"]:
+    time.sleep(3)
+    p = driver.find_element_by_xpath(
+    '/html/body/div[1]/c-wiz/div[1]/div/div[8]/div[3]/div[6]/div[3]/div/div[2]/div[1]/span/span/div/div/span[2]')
+    if p.get_attribute("innerHTML") < config["Preferences"]["MinimumPeople"]:
+         click("/html/body/div[1]/c-wiz/div[1]/div/div[8]/div[3]/div[9]/div[2]/div[2]/div")
          end2 = True
-  click("/html/body/div[1]/c-wiz/div[1]/div/div[8]/div[3]/div[9]/div[2]/div[2]/div")
 
 # Parse ini file
 config = configparser.ConfigParser()
