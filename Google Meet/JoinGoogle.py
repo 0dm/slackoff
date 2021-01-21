@@ -75,12 +75,10 @@ def joinClass():
 # Parse ini file
 config = configparser.ConfigParser()
 config.read("config.ini")
-
-if config["Preferences"]["UseJoinTime"] == True:
+if config.getboolean("Preferences", "UseJoinTime") == True:
     schedule.every().day.at(config["Preferences"]["JoinTime"]).do(joinClass)
-else:
-    joinClass()
 
-while config["Preferences"]["UseJoinTime"] == True:
+
+while config.getboolean("Preferences", "UseJoinTime") == True:
     schedule.run_pending()
     time.sleep(10)
