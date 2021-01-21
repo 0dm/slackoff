@@ -69,6 +69,7 @@ def joinClass():
   driver.find_element_by_xpath("/html/body/div[1]/div[3]/div/div[2]/span/div/div[2]/div[1]/div[1]/input").send_keys(config["Login"]["MeetLink"] + "\n")
 
   # Disable Camera & Microphone
+  time.sleep(4)
   click("/html/body/div[1]/c-wiz/div/div/div[8]/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div[3]/div[2]/div/div")
   click("/html/body/div[1]/c-wiz/div/div/div[8]/div[3]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div[3]/div[1]/div[1]/div/div[1]")
 
@@ -88,11 +89,13 @@ def joinClass():
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-if config["Preferences"]["UseJoinTime"] == True:
+if config.getboolean("Preferences", "UseJoinTime") == True:
     schedule.every().day.at(config["Preferences"]["JoinTime"]).do(joinClass)
 else:
-    joinClass()
+  joinClass()
 
-while config["Preferences"]["UseJoinTime"] == True:
+
+while config.getboolean("Preferences", "UseJoinTime") == True:
     schedule.run_pending()
     time.sleep(10)
+
