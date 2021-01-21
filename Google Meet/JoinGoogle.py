@@ -77,8 +77,6 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 if config.getboolean("Preferences", "UseJoinTime") == True:
     schedule.every().day.at(config["Preferences"]["JoinTime"]).do(joinClass)
-else:
-  joinClass()
 
 
 while config.getboolean("Preferences", "UseJoinTime") == True:
